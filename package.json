@@ -18,4 +18,5 @@
     "postinstall": "bower install",
 
     "prestart": "npm install",
+  }
 }
