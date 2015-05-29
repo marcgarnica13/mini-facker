@@ -1,8 +1,7 @@
 {
-  "name": "angular-phonecat",
-  "description": "A starter project for AngularJS",
+  "name": "mini-facker",
+  "description": "Angular client consuming Facker-News api",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-phonecat",
   "license": "MIT",
   "private": true,
   "dependencies": {
