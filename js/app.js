@@ -18,9 +18,13 @@ fackerApp.config(['$routeProvider',
         templateUrl: 'partials/submits-list.html',
         controller: 'SubmitsListCtrl'
       }).
-      when('/submits/:submitid', {
+      when('/submits/:submitId', {
         templateUrl: 'partials/submits-detail.html',
         controller: 'SubmitsDetailsCtrl'
+      }).
+      when('/submits/upvote/:submitId', {
+        templateUrl: 'partials/submits-list.html',
+        controller: 'SubmitsUpvoteCtrl'
       }).
       otherwise({
         redirectTo: '/submits'

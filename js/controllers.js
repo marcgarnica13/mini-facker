@@ -4,7 +4,7 @@
 
 var fackerControllers = angular.module('fackerControllers', []);
 
-fackerControllers.controller('SubmitsListCtrl', function($scope) {
+fackerControllers.controller('SubmitsListCtrl1', function($scope) {
     $scope.submits = [
     {'id' : '1',
      'title': 'wuau',
@@ -17,15 +17,17 @@ fackerControllers.controller('SubmitsListCtrl', function($scope) {
     $scope.submit_type = 'new';
 });
 
-fackerControllers.controller('SubmitsListCtrl1', function($scope, $http) {
-     $http.get('http://facker-news.herokuapp.com/submits.json', {headers: {'Authorization': 'Bearer TOKEN_VALUE'}}).
+fackerControllers.controller('SubmitsListCtrl', function($scope, $http) {
+     $http.get('http://facker-news.herokuapp.com/submits.json').
         success(function(data) {
             $scope.submits = data;
         })
     $scope.submit_type = 'new';
 });
 
-fackerControllers.controller('SubmitsDetailsCtrl', ['$scope', '$routeParams', 'Submit',
-  function($scope, $routeParams, Subbmit) {
-    $scope.submits = Subbmit.get({submitId: $routeParams.submitId});
-  }]);
+fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $routeParams) {
+    $http.get('http://facker-news.herokuapp.com/submits/'+$routeParams.submitId+'.json').
+        success(function(data) {
+            $scope.submit = data;
+        })
+  });
