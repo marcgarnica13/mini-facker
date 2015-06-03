@@ -22,6 +22,10 @@ fackerApp.config(['$routeProvider',
         templateUrl: 'partials/submits-detail.html',
         controller: 'SubmitsDetailsCtrl'
       }).
+      when('/comments/new/:submitId', {
+	templateUrl: 'partials/new-comment.html',
+	controller: 'NewCommentsCtrl'
+      }).
       otherwise({
         redirectTo: '/submits'
       });

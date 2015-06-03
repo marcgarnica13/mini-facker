@@ -3,7 +3,7 @@
 <p>{{submit.score}} points<p>
 <p><a href={{submit.url}}>{{submit.url}}</a></p>
 <h3>COMMENTS: </h3>
-<span ng-click=newComment(submit)> New comment </span>
+<span><a href='#/comments/new/{{submit.id}}'> New comment</a> </span>
 <ul>
     <li ng-repeat="comment in comments" ng-if="!comment.parent_id">
         <p>{{comment.content}} </p>            

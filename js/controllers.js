@@ -44,3 +44,14 @@ fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $rout
             $scope.comments = data;
             })
   });
+
+fackerControllers.controller('NewCommentsCtrl',
+    function($scope, $http, $routeParams) {
+	$scope.comment = function(submit, comment){
+			console.log('crido la funcio');
+			$http.get('http://facker-news.herokuapp.com/submits/upvote/'+submit.id+'.json').
+                success(function(data) {
+                    submit.score += 1;
+                })
+	};
+});
