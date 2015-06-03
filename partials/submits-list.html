@@ -18,9 +18,7 @@
             class="thumbnail submit-listing">
             <a href="#/submits/{{submit.id}}" class="thumb">{{submit.title}}</a>
             <p>{{submit.score}} points</p>
-            <p>
-              <a href="#/submits/upvote/{{submit.id}}" class="thumb">[+]</a>
-            </p>
+            <span ng-click="upvote(submit)">[+]</span>
         </li>
       </ul>
 

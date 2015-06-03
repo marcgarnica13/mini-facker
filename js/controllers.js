@@ -17,12 +17,20 @@ fackerControllers.controller('SubmitsListCtrl1', function($scope) {
     $scope.submit_type = 'new';
 });
 
-fackerControllers.controller('SubmitsListCtrl', function($scope, $http) {
-     $http.get('http://facker-news.herokuapp.com/submits.json').
-        success(function(data) {
-            $scope.submits = data;
-        })
-    $scope.submit_type = 'new';
+fackerControllers.controller('SubmitsListCtrl',
+    function($scope, $http) {
+        $http.get('http://facker-news.herokuapp.com/submits.json').
+            success(function(data) {
+                $scope.submits = data;
+            })
+        $scope.submit_type = 'new';
+
+        $scope.upvote = function(submit) {
+            $http.get('http://facker-news.herokuapp.com/submits/upvote/'+submit.id+'.json').
+                success(function(data) {
+                    submit.score += 1;
+                })
+        };
 });
 
 fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $routeParams) {
