@@ -38,4 +38,9 @@ fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $rout
         success(function(data) {
             $scope.submit = data;
         })
+
+    $http.get('http://facker-news.herokuapp.com/comments.json?submit_id='+$routeParams.submitId).
+        success(function(data) {
+            $scope.comments = data;
+            })
   });

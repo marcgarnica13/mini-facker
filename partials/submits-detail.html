@@ -1,3 +1,12 @@
 <h1>{{submit.title}}</h1>
 
-<p><a href={{submit.url}} class="thumb">{{submit.url}}</a></p>
+<p>{{submit.score}} points<p>
+<p><a href={{submit.url}}>{{submit.url}}</a></p>
+<h3>COMMENTS: </h3>
+<span ng-click=newComment(submit)> New comment </span>
+<ul>
+    <li ng-repeat="comment in comments" ng-if="!comment.parent_id">
+        <p>{{comment.content}} </p>            
+    </li>
+</ul>
+
