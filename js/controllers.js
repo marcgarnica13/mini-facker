@@ -25,6 +25,11 @@ fackerControllers.controller('SubmitsListCtrl',
             })
         $scope.submit_type = 'new';
 
+        $http.get('http://facker-news.herokuapp.com/users.json').
+            success(function(data) {
+                $scope.users = data;
+            })
+
         $scope.upvote = function(submit) {
             $http.get('http://facker-news.herokuapp.com/submits/upvote/'+submit.id+'.json').
                 success(function(data) {
@@ -32,6 +37,52 @@ fackerControllers.controller('SubmitsListCtrl',
                 })
         };
 });
+
+fackerControllers.controller('NewSubmitCtrl',
+    function($scope, $http) {
+       $scope.message = "Fill the form";
+       $scope.addSubmit = function() {
+                $http.post('http://facker-news.herokuapp.com/submits.json', {title: $scope.title, url: $scope.url, submit_type: "new", user_id : "1"}).
+                success(function(data) {
+                    $scope.message = "Added correctly";
+                })
+        };        
+});
+
+
+fackerControllers.controller('NewQuestionCtrl',
+    function($scope, $http) {
+       $scope.message = "Fill the form";
+       $scope.addSubmit = function() {
+                $http.post('http://facker-news.herokuapp.com/submits.json', {title: $scope.title, submit_type: "question", user_id : "1"}).
+                success(function(data) {
+                    $scope.message = "Added correctly";
+                })
+        };        
+});
+
+fackerControllers.controller('NewCommentsCtrl',
+    function($scope, $http, $routeParams) {
+       $scope.message = "Fill the form";
+       $scope.addSubmit = function() {
+                $http.post('http://facker-news.herokuapp.com/comments.json', {content: $scope.content, submit_id: $routeParams.submitId, user_id : "1"}).
+                success(function(data) {
+                    $scope.message = "Added correctly";
+                })
+        };        
+});
+
+fackerControllers.controller('NewReplyCtrl',
+    function($scope, $http, $routeParams) {
+       $scope.message = "Fill the form";
+       $scope.addSubmit = function() {
+                $http.post('http://facker-news.herokuapp.com/comments.json', {content: $scope.content, submit_id: $routeParams.submitId, parent_id : $routeParams.commentId, user_id : "1"}).
+                success(function(data) {
+                    $scope.message = "Added correctly";
+                })
+        };        
+});
+
 
 fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $routeParams) {
     $http.get('http://facker-news.herokuapp.com/submits/'+$routeParams.submitId+'.json').
@@ -43,15 +94,26 @@ fackerControllers.controller('SubmitsDetailsCtrl', function($scope, $http, $rout
         success(function(data) {
             $scope.comments = data;
             })
+
+    $http.get('http://facker-news.herokuapp.com/users.json').
+            success(function(data) {
+                $scope.users = data;
+            })
   });
 
-fackerControllers.controller('NewCommentsCtrl',
-    function($scope, $http, $routeParams) {
-	$scope.comment = function(submit, comment){
-			console.log('crido la funcio');
-			$http.get('http://facker-news.herokuapp.com/submits/upvote/'+submit.id+'.json').
-                success(function(data) {
-                    submit.score += 1;
-                })
-	};
-});
+fackerControllers.controller('CommentsDetailsCtrl', function($scope, $http, $routeParams) {
+    $http.get('http://facker-news.herokuapp.com/comments/'+$routeParams.commentId+'.json').
+        success(function(data) {
+            $scope.comment = data;
+        })
+
+    $http.get('http://facker-news.herokuapp.com/comments.json?parent_id='+$routeParams.commentId).
+        success(function(data) {
+            $scope.replies = data;
+            })
+
+    $http.get('http://facker-news.herokuapp.com/users.json').
+            success(function(data) {
+                $scope.users = data;
+            })
+  });

@@ -2,12 +2,16 @@
   <div class="row">
     <div class="col-md-2">
       <!--Sidebar content-->
-
+      <p></p>
       Submit type:
       <select ng-model="submit_type">
         <option value="new">New</option>
         <option value="question">Question</option>
       </select>
+      <p></p>
+      <p> <span><a href='#/news'> Add news</a> </span> </p>
+      <p> <span><a href='#/questions'> Add question</a> </span> </p>
+
 
     </div>
     <div class="col-md-10">
@@ -16,12 +20,14 @@
       <ul class="submits">
         <li ng-repeat="submit in submits" ng-if="submit_type == submit.submit_type"
             class="thumbnail submit-listing">
-            <a href="#/submits/{{submit.id}}" class="thumb">{{submit.title}}</a>
+            <p>
+            <a href="#/submits/{{submit.id}}">{{submit.title}}</a>
+            by:  {{users[submit.user_id].name}}
+            </p>
             <p>{{submit.score}} points</p>
             <span ng-click="upvote(submit)">[+]</span>
         </li>
       </ul>
-
     </div>
   </div>
 </div>

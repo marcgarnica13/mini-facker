@@ -1,0 +1,12 @@
+<h1>{{comment.content}}</h1>
+
+<p>By {{users[comment.user_id].name}}<p>
+<h3>Replies: </h3>
+<span><a href='#/comments/reply/{{comment.submit_id}}/{{comment.id}}'> New</a> </span>
+<ul>
+    <li ng-repeat="reply in replies">
+    	<p>By {{users[reply.user_id].name}}:</p>       
+        <p>{{reply.content}} </p>
+    </li>
+</ul>
+

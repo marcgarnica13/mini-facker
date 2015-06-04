@@ -6,7 +6,9 @@
 <span><a href='#/comments/new/{{submit.id}}'> New comment</a> </span>
 <ul>
     <li ng-repeat="comment in comments" ng-if="!comment.parent_id">
-        <p>{{comment.content}} </p>            
+    	<p>By {{users[comment.user_id].name}}:</p>       
+        <p>{{comment.content}} </p>
+        <a href="#/comments/{{comment.id}}">Replies</a>
     </li>
 </ul>
 
